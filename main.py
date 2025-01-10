@@ -26,7 +26,6 @@ def print_menu_points():
     This function can write a wellcome text
     :return: None
     """
-    tprint("Check - the - password")
     print(make_cute_line(" 1 - Проверка пароля на сложность "))
     print(make_cute_line(" 2 - Проверка пароля на необходимые символы и длину "))
     print(make_cute_line(" 3 - Генерация паролей "))
