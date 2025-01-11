@@ -20,15 +20,17 @@ def calculate_complexity(user_pas):
     :return: str() - result
     """
     m = calculate_password_power(user_pas)
+    if m == False:
+        return m
     n = len(user_pas)
-    print(f'm - {m}')
-    print(f'n - {len(user_pas)}')
+    # print(f'[LOG] m - {m}')
+    # print(f'[LOG] n - {n}')
     dif_levels = ["очень слабый - мгновенный взлом",
                   "слабый - данный тип паролей способен предотвратить атаку не на долго",
                   "средний - пароли с уровнем «Средний» можно использовать в корпоративных сетях;",
                   "высокий - пароль можно использовать для защиты конфиденциальной или финансовой информации;",
                   "сверхнадежный - пароль обладает очень большой стойкостью к подбору."]
-    entrop = round(log2(m ** len(user_pas)))
+    entrop = round(log2(m ** n))
     if entrop < 28:
         return f"{entrop} бит: {dif_levels[0]}"
     elif 28 <= entrop < 35:
@@ -55,7 +57,7 @@ def calculate_password_power(user_pas):
     symbols_alph = 0  # 32
 
     if ' ' in set(user_pas):
-        print("В введеном пароле присутсвтует пробел")
+        return False
     else:
         for el in user_pas:
             if ord(el) in range(1072, 1104):
@@ -70,9 +72,6 @@ def calculate_password_power(user_pas):
                 numb_alph = 1
             else:
                 symbols_alph = 1
+        # print(f'[LOG] {rus_alph_low,rus_alph_up,eng_alph_low,eng_alph_up,numb_alph,symbols_alph}')
         result = rus_alph_low * 33 + rus_alph_up * 33 + eng_alph_low * 26 + eng_alph_up * 26 + numb_alph * 10 + symbols_alph * 32
         return result
-
-user_input = input()
-print(calculate_complexity(user_input))
-
