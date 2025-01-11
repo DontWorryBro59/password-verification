@@ -1,5 +1,6 @@
 from art import tprint
 import check_the_password
+import check_symbols
 
 
 def main_program():
@@ -72,32 +73,18 @@ def open_submenu(item):
     """
     if item == 1:
         print(make_cute_line('Запущена проверка пароля на сложность'))
-        start_check_the_pass()
+        if check_the_password.start_check_the_pass() == 0:
+            print_menu_points()
+            open_submenu(get_item_menu())
     elif item == 2:
-        print(make_cute_line('Проверка пароля на необходимые символы и длину'))
+        print(make_cute_line('Запущена проверка пароля на необходимые символы и длину'))
+        if check_symbols.start_check_symbols() == 0:
+            print_menu_points()
+            open_submenu(get_item_menu())
     elif item == 3:
         print(make_cute_line('Генерация паролей'))
     else:
         print(make_cute_line('Пока!'))
-
-
-def start_check_the_pass():
-    """
-    This function to start the check_the_password function
-    :return: None
-    """
-    user_pass_inp = input("Введите ваш пароль или 0 для выхода: ")
-    if user_pass_inp.isdigit() and int(user_pass_inp) == 0:
-        print_menu_points()
-        open_submenu(get_item_menu())
-
-    result = check_the_password.calculate_complexity(user_pass_inp)
-    if result == False:
-        print(make_cute_line('Вы ввели неверный пароль, присутствуют пробелы'))
-        start_check_the_pass()
-    else:
-        print(make_cute_line(result))
-        start_check_the_pass()
 
 
 if __name__ == "__main__":

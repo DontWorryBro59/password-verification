@@ -20,7 +20,7 @@ def calculate_complexity(user_pas):
     :return: str() - result
     """
     m = calculate_password_power(user_pas)
-    if m == False:
+    if m == 'Error: is a space in the password':
         return m
     n = len(user_pas)
     # print(f'[LOG] m - {m}')
@@ -57,7 +57,7 @@ def calculate_password_power(user_pas):
     symbols_alph = 0  # 32
 
     if ' ' in set(user_pas):
-        return False
+        return 'Error: is a space in the password'
     else:
         for el in user_pas:
             if ord(el) in range(1072, 1104):
@@ -75,3 +75,20 @@ def calculate_password_power(user_pas):
         # print(f'[LOG] {rus_alph_low,rus_alph_up,eng_alph_low,eng_alph_up,numb_alph,symbols_alph}')
         result = rus_alph_low * 33 + rus_alph_up * 33 + eng_alph_low * 26 + eng_alph_up * 26 + numb_alph * 10 + symbols_alph * 32
         return result
+
+
+def start_check_the_pass():
+    """
+    This function to start the check_the_password function
+    :return: None
+    """
+    result = None
+    while result != 0:
+        user_pass_inp = input("Введите ваш пароль или 0 для выхода в главное меню: ")
+        result = calculate_complexity(user_pass_inp)
+        if user_pass_inp.isdigit() and int(user_pass_inp) == 0:
+            return 0
+        elif result == 'Error: is a space in the password':
+            print('Вы ввели неверный пароль, присутствуют пробелы')
+        else:
+            print(result)
