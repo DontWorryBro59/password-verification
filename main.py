@@ -1,6 +1,7 @@
 from art import tprint
 import check_the_password
 import check_symbols
+from make_cute_line import make_cute_line
 
 
 def main_program():
@@ -10,16 +11,7 @@ def main_program():
     open_submenu(get_item_menu())  # We receive a menu selection from the user and run the function
 
 
-def make_cute_line(main_l):
-    """
-    This function can to make a formatted line
-    :param main_l: str()
-    :return: str()
-    """
-    logo_length = 122
-    result = "=" * ((logo_length - len(main_l)) // 2) + main_l + "=" * ((logo_length - len(main_l)) // 2)
-    if len(result) < logo_length: result += '='
-    return result
+
 
 
 def print_menu_points():
@@ -40,13 +32,13 @@ def get_item_menu():
     :return: int()
     """
     print(make_cute_line(" Пожалуйста введите необходимый пункт меню для продолжения "))
-    user_input = input("Вы ввели пункт меню: ")
+    user_input = input()
     user_input = check_user_input_item(user_input)
     # print('Результат выполнения комманды : ', user_input)
     return user_input
 
 
-def check_user_input_item(user_inp):
+def check_user_input_item(user_inp: str) -> int:
     """
     This function is check the user input item menu and return INT or Message
     :param user_inp: str()
@@ -65,7 +57,7 @@ def check_user_input_item(user_inp):
         return check_user_input_item(user_inp)
 
 
-def open_submenu(item):
+def open_submenu(item: int) -> None:
     """
     This function is print submenu for user point
     :param item:

@@ -1,4 +1,5 @@
 from math import log2
+from make_cute_line import make_cute_line
 
 """
 Оценка стойкости парольных систем определяется по  формуле энтропии E = log2(M**N)
@@ -84,11 +85,12 @@ def start_check_the_pass():
     """
     result = None
     while result != 0:
-        user_pass_inp = input("Введите ваш пароль или 0 для выхода в главное меню: ")
+        print(make_cute_line("Введите ваш пароль или 0 для выхода в главное меню:"))
+        user_pass_inp = input()
         result = calculate_complexity(user_pass_inp)
         if user_pass_inp.isdigit() and int(user_pass_inp) == 0:
             return 0
         elif result == 'Error: is a space in the password':
-            print('Вы ввели неверный пароль, присутствуют пробелы')
+            print(make_cute_line('Вы ввели неверный пароль, присутствуют пробелы'))
         else:
-            print(result)
+            print(make_cute_line(result))

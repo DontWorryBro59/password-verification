@@ -1,4 +1,4 @@
-from main import make_cute_line
+from make_cute_line import make_cute_line
 
 """
 ord(el) in range(1072, 1104): а-я
