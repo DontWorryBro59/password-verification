@@ -1,7 +1,8 @@
-from art import tprint
 import check_the_password
 import check_symbols
+import generet_password
 from make_cute_line import make_cute_line
+from art import tprint
 
 
 def main_program():
@@ -9,9 +10,6 @@ def main_program():
     print(make_cute_line(" Программа предназначена для проверки вашего пароля или генерации нового пароля "))
     print_menu_points()
     open_submenu(get_item_menu())  # We receive a menu selection from the user and run the function
-
-
-
 
 
 def print_menu_points():
@@ -74,9 +72,11 @@ def open_submenu(item: int) -> None:
             print_menu_points()
             open_submenu(get_item_menu())
     elif item == 3:
-        print(make_cute_line('Генерация паролей'))
+        if generet_password.main_gen_pass() == 0:
+            print_menu_points()
+            open_submenu(get_item_menu())
     else:
-        print(make_cute_line('Пока!'))
+        print(make_cute_line('Работа программы завершена'))
 
 
 if __name__ == "__main__":
